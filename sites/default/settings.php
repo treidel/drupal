@@ -456,3 +456,12 @@ ini_set('session.cookie_lifetime', 2000000);
  * Remove the leading hash signs to disable.
  */
 # $conf['allow_authorize_operations'] = FALSE;
+
+
+
+# debug settings for drupal
+error_reporting(-1);
+$conf['error_level'] = 2;
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+?>
