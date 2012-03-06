@@ -53,3 +53,99 @@ function eventspace_authentication_form($form, &$form_state) {
 
   return system_settings_form($form);
 }
+
+
+/**
+ * Implements hook_form_user_login_block_alter().
+ */
+function eventspace_authentication_form_user_login_block_alter(&$form, &$form_state) {
+	_eventspace_authentication_user_login_form_alter($form, $form_state);
+}
+
+/**
+ * Implements hook_form_user_login_alter().
+ */
+
+function eventspace_authentication_form_user_login_alter(&$form, &$form_state) {
+    _eventspace_authentication_user_login_form_alter($form, $form_state);
+}
+
+/**
+ * Implements hook_form_user_login_alter().
+ */
+
+ function _eventspace_authentication_user_login_form_alter(&$form, &$form_state) {
+    $saveForm = $form;
+
+    $form = array();
+
+    // overrides Drupals default validator
+    foreach( $saveForm as $key => $value ) {
+        if( $key == '#validate' ) {
+            $form[ $key ] = array();
+            foreach( $value as $validator ) {
+                if( $validator == 'user_login_authenticate_validate' ) {
+                    $validator = 'eventspace_authentication_authenticate_validate';
+                } 
+                $form[ $key ][] = $validator;
+            }
+        } else {
+            $form[ $key ] = $value;
+        }
+    }
+}
+
+/**
+ * Custom validation method 
+ */
+
+function eventspace_authentication_authenticate_validate( $form, &$form_state ) {
+    $name = $form_state[ 'values' ][ 'name' ];
+    $pass = $form_state[ 'values' ][ 'pass' ];
+
+    if( $name == 'root' )
+    {
+        return user_login_authenticate_validate( $form, $form_state );
+    }
+
+    $authenticated = eventspace_authentication_method($name, $pass)
+
+    if ($authenticated)
+    {
+        // this sets up the external user with Drupal by creating a local entry. If they don't exist they are added
+        user_external_login_register($name, "eventspace_authorization");
+
+        // we must set the 'uid' to pass back.  this looks up the logged in user and sets the Drupal UID
+        $account = user_external_load($name);
+        $form_state['uid'] = $account->uid;
+    }
+    else
+    {
+        // do nothing, Drupal will handle the errors
+
+    }
+}
+
+/**
+ * external authentication method 
+ */
+
+function eventspace_authentication_method( $username, $password) {
+    require_once 'libraries/pest/PestXML.php';
+    // fetch the URL
+    $rest_url = variable_get('eventspace_authentication_rest_url');
+    
+    // create the client
+    $client = new Pest($rest_url);
+    $client->setupAuth($username, $password);
+    
+    // do a POST to see if we've got the right username + password
+    try {
+        $owner_url = $client->post('owners/login', '');
+    } 
+    catch (Exception $e) {
+      return false;
+    }
+    // success
+    return true;
+}
