@@ -17,3 +17,39 @@ function eventspace_authentication_help($path, $arg) {
       break;
   }
 } 
+
+/**
+ * Implements hook_menu().
+ */
+function eventspace_authentication_menu() {
+  $items = array();  
+
+  $items['admin/config/content/current_posts'] = array(
+    'title' => 'EventSpace Authentication',
+    'description' => 'Configuration for EventSpace Authentication module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('eventspace_authentication_form'),
+    'access arguments' => array('access administration pages'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  
+  return $items;
+} 
+
+/**
+ * Form function, called by drupal_get_form() 
+ * in eventspace_authentication_menu().
+ */
+function eventspace_authentication_form($form, &$form_state) {
+  $form['eventspace_authentication_rest_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('URL of the REST server'),
+    '#default_value' => variable_get('eventspace_authentication_rest_url'),
+    '#size' => 80,
+    '#maxlength' => 255,
+    '#description' => t('The URL of the REST server where the EventSpace REST API is hosted.'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
+}
