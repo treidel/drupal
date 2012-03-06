@@ -108,7 +108,7 @@ function eventspace_authentication_authenticate_validate( $form, &$form_state ) 
         return user_login_authenticate_validate( $form, $form_state );
     }
 
-    $authenticated = eventspace_authentication_method($name, $pass)
+    $authenticated = eventspace_authentication_method($name, $pass);
 
     if ($authenticated)
     {
