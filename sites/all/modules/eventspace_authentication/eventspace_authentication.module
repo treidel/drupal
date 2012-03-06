@@ -110,7 +110,9 @@ function eventspace_authentication_authenticate_validate( $form, &$form_state ) 
 
     $authenticated = eventspace_authentication_method($name, $pass);
 
-    if ($authenticated)entry. If they don't exist they are added
+    if ($authenticated)
+    {
+        // this sets up the external user with Drupal by creating a local entry. If they don't exist they are added
         user_external_login_register($name, "eventspace_authorization");
 
         // we must set the 'uid' to pass back.  this looks up the logged in user and sets the Drupal UID
@@ -124,8 +126,6 @@ function eventspace_authentication_authenticate_validate( $form, &$form_state ) 
     }
 }
 
-    {
-        // this sets up the external user with Drupal by creating a local 
 /**
  * external authentication method 
  */
