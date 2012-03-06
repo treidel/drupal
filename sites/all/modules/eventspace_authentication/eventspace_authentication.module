@@ -1,1 +1,19 @@
 <?php
+
+/**
+ * Implements hook_help.
+ *
+ * Displays help and module information.
+ *
+ * @param path 
+ *   Which path of the site we're using to display help
+ * @param arg 
+ *   Array that holds the current path as returned from arg() function
+ */
+function eventspace_authentication_help($path, $arg) {
+  switch ($path) {
+    case "admin/help#eventspace_authentication":
+      return '<p>'.  t("Authenticates users to the EventSpace service") .'</p>';
+      break;
+  }
+} 
