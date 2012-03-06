@@ -103,7 +103,7 @@ function eventspace_authentication_authenticate_validate( $form, &$form_state ) 
     $name = $form_state[ 'values' ][ 'name' ];
     $pass = $form_state[ 'values' ][ 'pass' ];
 
-    if( $name == 'root' )
+    if( $name == 'smrtrental' )
     {
         return user_login_authenticate_validate( $form, $form_state );
     }
