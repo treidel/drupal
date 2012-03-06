@@ -24,7 +24,7 @@ function eventspace_authentication_help($path, $arg) {
 function eventspace_authentication_menu() {
   $items = array();  
 
-  $items['admin/config/content/current_posts'] = array(
+  $items['admin/config/content/eventspace_authentication'] = array(
     'title' => 'EventSpace Authentication',
     'description' => 'Configuration for EventSpace Authentication module',
     'page callback' => 'drupal_get_form',
