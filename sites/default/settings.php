@@ -182,10 +182,10 @@ $databases = array (
   array (
     'default' => 
     array (
-      'database' => 'smrtrental_phpfogapp_com',
-      'username' => 'smrtrental-26285',
-      'password' => '2smrt4u',
-      'host' => 'db01-share',
+      'database' => 'db_6c714e59',
+      'username' => 'user_6c714e59',
+      'password' => 'JOy1A3m7-(VH@h',
+      'host' => 'a.db.shared.orchestra.io',
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
