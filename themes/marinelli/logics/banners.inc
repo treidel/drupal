@@ -63,7 +63,7 @@ function marinelli_banner_markup($banners) {
     $variables = array(
       'path'  => $banner['image_path'],
       'alt' => t('@image_desc', array('@image_desc'=>$banner['image_description'])),
-      'title'   => t('@image_title', array('@image_title'=>$banner['image_title'])),
+      'title'   => t('!image_title', array('@image_title'=>$banner['image_title'])),
       'attributes' => array(
         'class' => 'slide' . ($i != 0 ? ' marinelli-hide-no-js' : ''), // hide all the slides except #1
         'id' => 'slide-number-' . $i,
