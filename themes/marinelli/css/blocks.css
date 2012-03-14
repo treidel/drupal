@@ -18,6 +18,7 @@
 }
 
 .block .title{
+	visibility: hidden;
 	margin:0px;
 	padding-bottom:3px;
 	margin-bottom: 10px;
