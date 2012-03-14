@@ -167,7 +167,13 @@ body,html{
 	padding-right:8px;
 }
 
+/*
 .utility ul.menu li:after{
+	content:"|";
+}
+*/
+
+.utility ul.menu li.first:after{
 	content:"|";
 }
 
