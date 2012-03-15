@@ -42,6 +42,7 @@
 			<?php if($site_name || $siteslogan ): ?>
 			<!--start title and slogan-->
 			<div id="title-slogan">
+			    <img src="http://s3.amazonaws.com/public.geteventspace.com/logo.png"/>
 				<?php if($site_name): ?>
 				<?php print $sitename; ?>
 				<?php endif; ?>
