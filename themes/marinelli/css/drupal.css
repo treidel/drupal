@@ -185,7 +185,3 @@ body.page-taxonomy-term h1#page-title { /* taxonomy term page */
 	font-style: italic;
 	background: #fcfce2;
 }
-
-h1#page-title {
-  visibility: hidden;	
-}
